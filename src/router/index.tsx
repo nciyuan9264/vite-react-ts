@@ -3,7 +3,7 @@ import ThreeJs from "../components/ThreeJs";
 import PixiJs from "../components/PixiJs";
 
 const GetRouters = () => {
-    const routes: RouteObject[] = useRoutes([
+    const routes = useRoutes([
         {
             path: "/",
             element: <Navigate to="/ThreeJs" />
@@ -16,7 +16,7 @@ const GetRouters = () => {
             path: "/PixiJs",
             element: <PixiJs />
         },
-    ]) as any;
+    ])
     return routes
 }
 export default GetRouters;
