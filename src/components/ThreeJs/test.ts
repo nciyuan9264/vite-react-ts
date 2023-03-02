@@ -63,7 +63,7 @@ const Print = () => {
     camera.lookAt(scene.position);
 
     // add the output of the renderer to the html element
-    document.getElementById("webgl-output").appendChild(renderer.domElement);
+    document.getElementById("webgl-output")?.appendChild(renderer.domElement);
 
     // render the scene
     renderer.render(scene, camera);
