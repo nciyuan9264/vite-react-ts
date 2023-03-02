@@ -1,17 +1,16 @@
 import { useRoutes, Navigate } from "react-router-dom";
 import ThreeJs from "../components/ThreeJs";
 import PixiJs from "../components/PixiJs";
-import Algorithm from "../components/Algorithm"
 
 const GetRouters = () => {
     const routes = useRoutes([
         {
             path: "/",
-            element: <Navigate to="/Algorithm" />
+            element: <Navigate to="/ThreeJs" />
         },
         {
-            path: "/Algorithm",
-            element: <Algorithm />
+            // path: "/Algorithm",
+            // element: <Algorithm />
         },
         {
             path: "/ThreeJs",
