@@ -9,7 +9,7 @@ const ThreeJs: React.FC = () => {
         Print();
     },[])
     return(
-        <div>three</div>
+        <div id="webgl-output">three</div>
     )
 }
 export default ThreeJs;
