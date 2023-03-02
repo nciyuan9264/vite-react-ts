@@ -1,16 +1,18 @@
 import { useRoutes, Navigate } from "react-router-dom";
 import ThreeJs from "../components/ThreeJs";
 import PixiJs from "../components/PixiJs";
+import PlanckJS from "../components/PlanckJS";
+
 
 const GetRouters = () => {
     const routes = useRoutes([
         {
             path: "/",
-            element: <Navigate to="/ThreeJs" />
+            element: <Navigate to="/PlanckJS" />
         },
         {
-            // path: "/Algorithm",
-            // element: <Algorithm />
+            path: "/PlanckJS",
+            element: <PlanckJS />
         },
         {
             path: "/ThreeJs",
