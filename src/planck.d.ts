@@ -80,3 +80,5 @@ interface BodyDef {
     active?: boolean;
     userData?: any;
 }
+
+export {BodyDef}
