@@ -1,5 +1,4 @@
 import * as planck from 'planck';
-import { BodyDef } from '../../../planck';
 let Vec2 = planck.Vec2;
 
 // Define the gravity vector.
@@ -26,7 +25,7 @@ let groundBox = planck.Box(50.0, 10.0);
 groundBody.createFixture(groundBox, 0.0);
 
 // Define the dynamic body. We set its position and call the body factory.
-let bodyDef: BodyDef = {
+let bodyDef: planck.BodyDef = {
     type: 'dynamic',
     position: Vec2(0.0, 4.0),
 }

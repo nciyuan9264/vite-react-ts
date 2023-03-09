@@ -1,7 +1,12 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { FirstPixi } from './pixiTest/firstPixi'
 const PixiJs: React.FC = () => {
-    return(
+
+    useEffect(() => {
+        const p = new FirstPixi()
+        p.draw();
+    }, []);
+    return (
         <div id='pixi'>pixi</div>
     )
 }

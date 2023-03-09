@@ -5,7 +5,7 @@ import planckFun from './components/planck'
 const PlanckJS: React.FC = () => {
 
     useEffect(() => {
-        planckFun();
+        // planckFun();
     }, []);
 
     return <canvas width={500} height={500} />;
