@@ -54,19 +54,6 @@ let velocityIterations = 6;
 let positionIterations = 2;
 
 
-// This is our little game loop.
-for (let i = 0; i < 60; ++i) {
-    // Instruct the world to perform a single step of simulation.
-    // It is generally best to keep the time step and iterations fixed.
-    world.step(timeStep, velocityIterations, positionIterations);
-
-    // Now print the position and angle of the body.
-    let position = body.getPosition();
-    let angle = body.getAngle();
-
-    console.log(position.x.toFixed(2), position.y.toFixed(2), angle.toFixed(2));
-}
-
 export default function () {
     for (let i = 0; i < 60; ++i) {
         // Instruct the world to perform a single step of simulation.
