@@ -7,14 +7,15 @@ class PixiMain extends PIXI.Container {
         super();
 
         this.renderer = PIXI.autoDetectRenderer({
-            width: 800,
-            height: 800,
+            width: window.innerWidth,
+            height: window.innerHeight,
             antialias: false,
             view: htmlEle,
             transparent: false,
             backgroundColor: 0x1099bb,
         });
-        (window as any).root = this;
+        (this.renderer as any).stage = this;
+        (window as any).PixiMain = this;
     }
 }
 

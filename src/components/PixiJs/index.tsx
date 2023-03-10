@@ -8,6 +8,8 @@ const PixiJs: React.FC = () => {
         initPixiMain();
         startDraw();
         render();
+        window.addEventListener('resize', changeCanvasSize);
+        return () => window.removeEventListener('resize', changeCanvasSize);
     }, []);
 
     const initPixiMain = () => {
@@ -21,6 +23,10 @@ const PixiJs: React.FC = () => {
 
     const render = () => {
         pixiMain.renderer.render(pixiMain);
+    }
+
+    const changeCanvasSize = () => {
+        pixiMain.renderer.resize(window.innerWidth, window.innerHeight);
     }
 
     return (
