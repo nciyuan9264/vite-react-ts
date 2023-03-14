@@ -19,7 +19,7 @@ const PixiJs: React.FC = () => {
     }
 
     const update = (delta: number, ticker: any) => {
-        console.log(delta, ticker.deltaTime);
+        console.log(delta, ticker.elapsedMS, ticker);
     }
 
     const startDraw = () => {
@@ -28,15 +28,15 @@ const PixiJs: React.FC = () => {
     }
 
     const render = () => {
-        const ticker = new PIXI.ticker.Ticker();
-        ticker.minFPS = 60;
-        ticker.deltaTime = 1 / ticker.minFPS;
+        const ticker = new PIXI.Ticker();
+        ticker.minFPS = 10;
+        ticker.maxFPS = 30;
         ticker.autoStart = true;
         // 添加更新函数到Ticker对象
         ticker.add((delta: number) => {
-            // pixiMain.renderer.render(pixiMain);
+            pixiMain.renderer.render(pixiMain);
             update(delta, ticker);
-        });
+        })
     }
 
     const changeCanvasSize = () => {

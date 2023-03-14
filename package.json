@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/pixi.js": "^4.7.3",
-    "pixi.js": "^4.7.3",
+    "@types/pixi.js": "^5.0.0",
+    "pixi.js": "^7.1.1",
     "planck": "^1.0.0-alpha.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
