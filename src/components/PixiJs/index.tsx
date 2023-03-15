@@ -5,6 +5,7 @@ import { Draw } from './pixiTest/Draw'
 const PixiJs: React.FC = () => {
     let pixiMain: any = null;
     let draw: any = null;
+    let flag = true;
     const pixiRoot = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
         initPixiMain();
@@ -18,8 +19,16 @@ const PixiJs: React.FC = () => {
         pixiMain = new PixiMain(pixiRoot.current as HTMLCanvasElement);
     }
 
-    const update = (delta: number, ticker: any) => {
-        console.log(delta, ticker.elapsedMS, ticker);
+    const update = (delta: number) => {
+        if (draw.graphics.x > 400) flag = false
+        if (draw.graphics.x < 10) flag = true
+        if (flag) {
+            draw.graphics.x += delta * 60
+        } else {
+            draw.graphics.x -= delta * 60
+        }
+        pixiMain.renderer.render(pixiMain);
+        // console.log(draw.graphics.x);
     }
 
     const startDraw = () => {
@@ -29,13 +38,14 @@ const PixiJs: React.FC = () => {
 
     const render = () => {
         const ticker = new PIXI.Ticker();
+        ticker.maxFPS = 60;
         ticker.minFPS = 10;
-        ticker.maxFPS = 30;
         ticker.autoStart = true;
         // 添加更新函数到Ticker对象
         ticker.add((delta: number) => {
             pixiMain.renderer.render(pixiMain);
-            update(delta, ticker);
+            let FPM = delta / PIXI.Ticker.targetFPMS / 1000;
+            update(FPM);
         })
     }
 

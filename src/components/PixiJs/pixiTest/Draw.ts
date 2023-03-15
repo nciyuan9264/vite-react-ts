@@ -12,8 +12,11 @@ export class Draw extends PIXI.Container {
 
     draw = () => {
         this.graphics.beginFill(0x000fff);
-        this.graphics.drawRect(200, 200, 50, 50);
+        this.graphics.drawRect(0, 0, 50, 50);
         this.graphics.endFill();
+        console.log(this.graphics.x);
+        this.graphics.x = 200;
+        this.graphics.y = 200;
         this.root.addChild(this.graphics);
     }
 
