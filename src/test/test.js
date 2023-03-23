@@ -11,7 +11,7 @@ let intersection = polygonClipping.intersection(poly1, poly2 /* , poly3, ... */)
 // let difference = polygonClipping.difference  (poly1, poly2 /* , poly3, ... */)
 // const a = {union, intersection, xor, difference};
 
-export default a;
+// export default a;
 
 // console.log(...union, ...intersection, ...xor, ...difference)
 console.log(...intersection)

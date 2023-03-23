@@ -1,4 +1,4 @@
-import SplayTree from 'splaytree';
+import SplayTree from '../lib/splaytree/splay.js';
 import {
   orient2d
 } from './robust-predicates/orient2d.js';
