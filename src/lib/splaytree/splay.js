@@ -85,7 +85,7 @@ function __generator(thisArg, body) {
             t = op;
             break;
           }
-          if (t && _.label < t[2]) {
+          if (_.label < t[2]) {
             _.label = t[2];
             _.ops.push(op);
             break;
