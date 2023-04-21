@@ -1,8 +1,11 @@
 import * as planck from 'planck';
 let Vec2 = planck.Vec2;
-
+const heigh = 3400.0;
+let box: HTMLDivElement;
+let lastTime: any;
+let lastY: any;
 // Define the gravity vector.
-let gravity = Vec2(0.0, -10.0);
+let gravity = Vec2(0.0, -100.0);
 
 // Construct a world object, which will hold and simulate the rigid bodies.
 let world = planck.World(gravity);
@@ -27,7 +30,7 @@ groundBody.createFixture(groundBox, 0.0);
 // Define the dynamic body. We set its position and call the body factory.
 let bodyDef: planck.BodyDef = {
     type: 'dynamic',
-    position: Vec2(0.0, 4.0),
+    position: Vec2(0.0, heigh),
 }
 let body = world.createBody(bodyDef);
 
@@ -40,7 +43,7 @@ let fixtureDef = {
     // Set the box density to be non-zero, so it will be dynamic.
     density: 1.0,
     // Override the default friction.
-    friction: 0.3,
+    // friction: 0,
 };
 
 // Add the shape to the body.
@@ -53,19 +56,29 @@ let timeStep = 1.0 / 60.0;
 let velocityIterations = 6;
 let positionIterations = 2;
 
+function loop() {
+    let t = Date.now();
+    if ((t - lastTime) / 1000 > 0.016) {
+        // In each frame call world.step with fixed timeStep
+        world.step(timeStep);
+        // Request a new frame
+
+        let position = body.getPosition();
+        // let angle = body.getAngle();
+        box.style.top = (heigh - position.y) + 'px';
+        console.log(position.x, lastY - position.y);
+        lastY = position.y;
+        lastTime = Date.now();
+    }
+    window.requestAnimationFrame(loop);
+
+}
+
 
 export default function () {
-    for (let i = 0; i < 60; ++i) {
-        // Instruct the world to perform a single step of simulation.
-        // It is generally best to keep the time step and iterations fixed.
-        world.step(timeStep, velocityIterations, positionIterations);
-
-        // Now print the position and angle of the body.
-        let position = body.getPosition();
-        let angle = body.getAngle();
-
-        console.log(position.x.toFixed(2), position.y.toFixed(2), angle.toFixed(2));
-    }
+    box = document.querySelector('.box') as HTMLDivElement;
+    lastTime = Date.now();
+    loop();
 }
 
 // console.log(Math.abs(position.x) < 0.01);

@@ -10,7 +10,10 @@ const PlanckJS: React.FC = () => {
 
     return (
         <div className='planck-root'>
-            <canvas className='canvas-root' width={500} height={500} />
+            {/* <canvas className='canvas-root' width={500} height={500} /> */}
+            <div className='stage'>
+                <div className='box'>box</div>
+            </div>
             <div className='startBtn' ref={startBtn} onClick={planckTest}>开始</div>
         </div>
     );
