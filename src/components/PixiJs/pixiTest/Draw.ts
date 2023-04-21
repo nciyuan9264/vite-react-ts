@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js'
-
+import Cat from '../jsdemo.js'
+// import { a } from '../tsdemo.ts'
 export class Draw extends PIXI.Container {
     root: any;
     graphics: PIXI.Graphics;
@@ -14,10 +15,11 @@ export class Draw extends PIXI.Container {
         this.graphics.beginFill(0x000fff);
         this.graphics.drawRect(0, 0, 50, 50);
         this.graphics.endFill();
-        console.log(this.graphics.x);
         this.graphics.x = 200;
         this.graphics.y = 200;
         this.root.addChild(this.graphics);
+        Cat.sayHello();
+        // console.log(a);
     }
 
 
