@@ -66,7 +66,7 @@ function loop() {
         let position = body.getPosition();
         // let angle = body.getAngle();
         box.style.top = (heigh - position.y) + 'px';
-        console.log(position.x, lastY - position.y);
+        console.log(position.x, position.y, lastY - position.y);
         lastY = position.y;
         lastTime = Date.now();
     }

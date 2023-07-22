@@ -1,0 +1,105 @@
+<mxfile host="65bd71144e">
+    <diagram id="VzX5R7IkRhMT7C6Zk9HH" name="第 1 页">
+        <mxGraphModel dx="863" dy="523" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" value="" style="edgeStyle=none;html=1;fontSize=19;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="267.5" y="190" as="targetPoint"/>
+                        <mxPoint x="135.00000000000023" y="170" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="npm start" style="ellipse;fontSize=19;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="130" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="edgeStyle=none;html=1;fontSize=19;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="5" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="npm server:dev" style="rounded=1;fontSize=19;" parent="1" vertex="1">
+                    <mxGeometry x="201.25" y="150" width="157.5" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="edgeStyle=none;html=1;fontSize=19;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="6" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="edgeStyle=none;html=1;fontSize=19;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="6" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="npm copy:dependjs" style="fontSize=19;rounded=1;" parent="1" vertex="1">
+                    <mxGeometry x="180" y="260" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="8" target="14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="gulp copy-dependjs" style="fontSize=19;rounded=1;" parent="1" vertex="1">
+                    <mxGeometry x="180" y="350" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="10" target="16">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="10" target="18">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="npm compile" style="fontSize=19;rounded=1;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="260" width="202.5" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="生成src/assets/dependJS/的文件" style="whiteSpace=wrap;html=1;fontSize=19;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="115" y="430" width="330" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="16" target="27">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="gulp compile" style="fontSize=19;rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="521.25" y="350" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="cross-env BABEL_ENV=commonjs IS_SERVER=1 webpack-dev-server --env=dev --progress --colors --profile --watch&quot;" style="whiteSpace=wrap;fontSize=19;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="748.75" y="230" width="456.25" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="27" target="29">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="480" as="sourcePoint"/>
+                        <mxPoint x="720" y="490" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="31" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="27" target="32">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="581.5652173913045" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="produceIcon.js" style="whiteSpace=wrap;fontSize=19;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="506.72" y="440" width="149.07" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="generate_config_file.js&lt;br&gt;自动生成配置文件" style="whiteSpace=wrap;fontSize=19;rounded=1;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1950" y="425" width="211.25" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=18;" edge="1" parent="1" source="32" target="34">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="720" y="544.7391304347827" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="theMessageOfEquipment.js&lt;br style=&quot;font-size: 18px;&quot;&gt;生成器材图标(容器和辅助)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="457.2" y="520.26" width="248.11" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=18;" edge="1" parent="1" source="34" target="36">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="920" y="542.1304347826087" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="convertXLS2JSON.js&lt;br style=&quot;font-size: 18px;&quot;&gt;生成药品的json和通过读取药品表生成json" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="760" y="520" width="370" height="59.74" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=18;" edge="1" parent="1" source="36" target="38">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1200" y="544.7391304347827" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="converEquipmentInteractiveSheet.js&#10;读取'化学项目进度管理.xls'输出成以下格式：&#10;{'滴定管' : {'烧杯': {}, '试管': {x:10, y:20}}};" style="rounded=1;whiteSpace=wrap;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="1160" y="510.26" width="400" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="produceCompositeTest.js&#10;生成组合实验" style="rounded=1;whiteSpace=wrap;fontSize=18;" vertex="1" parent="1">
+                    <mxGeometry x="1630" y="520.26" width="230" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

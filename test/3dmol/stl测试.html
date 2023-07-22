@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babylon.js STL Material Viewer</title>
+    <!-- 使用 CDN 加载 Babylon.js -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+<body>
+    <canvas id="renderCanvas" style="width: 100%; height: 100%; touch-action: none;"></canvas>
+    <button id = 'change'>change material</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 获取canvas元素
+            var canvas = document.getElementById("renderCanvas");
+            let btn = document.getElementById('change')
+            // 创建一个3D引擎
+            var engine = new BABYLON.Engine(canvas, true);
+
+            // 创建场景
+            var scene = new BABYLON.Scene(engine);
+
+            // 创建摄像机
+            var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 5, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, true);
+
+            // 创建灯光
+            var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+            // 加载STL文件
+            BABYLON.SceneLoader.ImportMesh("", "./data/", "n.stl", scene, function (meshes) {
+                // STL文件加载成功后的回调函数
+                // 你可以在这里对加载的模型进行一些操作，比如缩放、旋转等
+
+                // 自动适应模型大小，使其居中显示
+                var model = meshes[0];
+                var modelBoundingBox = model.getBoundingInfo().boundingBox;
+                var modelCenter = modelBoundingBox.center;
+                var modelSize = modelBoundingBox.extendSize;
+                var maxSize = Math.max(modelSize.x, modelSize.y, modelSize.z);
+                var target = modelCenter.scale(-1);
+                model.setPivotMatrix(BABYLON.Matrix.Translation(target.x, target.y, target.z));
+                model.scaling.scaleInPlace(2 / maxSize);
+
+                // 创建不同的材质
+                var material1 = new BABYLON.StandardMaterial("material1", scene);
+                material1.diffuseColor = new BABYLON.Color3(1, 0, 0); // 红色
+
+                var material2 = new BABYLON.StandardMaterial("material2", scene);
+                material2.diffuseColor = new BABYLON.Color3(0, 1, 0); // 绿色
+
+                // 将材质应用到模型
+                model.material = material1; // 初始使用红色材质
+
+                // 按下鼠标时切换材质
+                var currentMaterialIndex = 0;
+                btn.addEventListener("mousedown", function () {
+                    console.log(123)
+                    currentMaterialIndex = 1 - currentMaterialIndex;
+                    model.material = currentMaterialIndex === 0 ? material1 : material2;
+                });
+
+                // 渲染场景
+                engine.runRenderLoop(function () {
+                    scene.render();
+                });
+            });
+
+            // 在窗口大小变化时重新渲染
+            window.addEventListener("resize", function () {
+                engine.resize();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3Dmol.js SDF Viewer</title>
+    <!-- Include 3Dmol.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.1/3Dmol-min.js"></script>
+</head>
+
+<body>
+    <h1>3Dmol.js SDF Viewer</h1>
+    <input type="file" id="fileInput">
+    <button id="toggleStyleButton">Toggle Style</button>
+    <div id="viewer3D" style="width: 100%; height: 500px;"></div>
+
+    <script>
+        var viewer;
+        var currentStyle = "stick"; // Track the current style
+
+        // Get the selected SDF file from the file input
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var content = e.target.result;
+                    showMolecule(content);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function showMolecule(sdfContent) {
+            viewer = $3Dmol.createViewer("viewer3D", {
+                defaultcolors: $3Dmol.rasmolElementColors
+            });
+
+            viewer.addModel(sdfContent, "sdf");
+
+            // Set the initial style to stick
+            viewer.setStyle({ 'stick': { color: 'spectrum' } });
+            viewer.zoomTo();
+            viewer.setClickable({},true,function(atom,viewer,event,container) {
+                console.log(atom)
+
+               });
+            viewer.render();
+        }
+
+        // Add a button click event to toggle between stick and cartoon styles
+        document.getElementById('toggleStyleButton').addEventListener('click', function () {
+            viewer.setStyle({ 'sphere': { color: 'spectrum' } });
+            viewer.render();
+        });
+    </script>
+</body>
+
+</html>
