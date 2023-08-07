@@ -40,7 +40,7 @@
             viewer.addModel(sdfContent, "sdf");
 
             // Set the initial style to stick
-            viewer.setStyle({ 'stick': { color: 'spectrum' } });
+            viewer.setStyle({}, {sphere: {scale: 0.05}, stick: {}});
             viewer.zoomTo();
             viewer.setClickable({},true,function(atom,viewer,event,container) {
                 console.log(atom)
