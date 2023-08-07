@@ -3,13 +3,13 @@ import React from "react";
 import ThreeJs from "../components/ThreeJs";
 import PixiJs from "../components/PixiJs";
 import PlanckJS from "../components/PlanckJS";
-
+import VisualizingQuaternions from "../components/VisualizingQuaternions";
 
 const GetRouters = () => {
     const routes = useRoutes([
         {
             path: "/",
-            element: <Navigate to="/PlanckJS" />
+            element: <Navigate to="/VisualizingQuaternions" />
         },
         {
             path: "/PlanckJS",
@@ -23,6 +23,10 @@ const GetRouters = () => {
             path: "/PixiJs",
             element: <PixiJs />
         },
+        {
+            path: "/VisualizingQuaternions",
+            element: <VisualizingQuaternions />
+        }
     ])
     return routes
 }

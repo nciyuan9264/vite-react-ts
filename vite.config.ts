@@ -1,6 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,7 +12,14 @@ export default defineConfig({
       },
     },
   },
-  define: {
-    global: {}
+  server: {
+    hmr: true,
+    //vue3 vite配置热更新不用手动刷新
+    // Listening on all local IPs
+    // host: true,
   },
-})
+
+  define: {
+    global: {},
+  },
+});
