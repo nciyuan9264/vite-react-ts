@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<!--
+    这是一个从chatgpt复制用来测试欧拉角的文件
+-->
+<head>
+    <title>Babylon.js Quaternion Demo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            // Get the canvas element and create a Babylon.js engine
+            var canvas = document.getElementById('renderCanvas');
+            var engine = new BABYLON.Engine(canvas, true);
+
+            // Create a scene
+            var scene = new BABYLON.Scene(engine);
+
+            // Create a camera and position it
+            var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 4, 10, BABYLON.Vector3.Zero(), scene);
+
+            // Attach the camera to the canvas
+            camera.attachControl(canvas, true);
+
+            // Create a box and add it to the scene
+            var box = BABYLON.MeshBuilder.CreateBox("Box", { size: 2 }, scene);
+
+            // Create a quaternion for rotation
+            var quaternion = new BABYLON.Quaternion();
+
+            // Animation loop
+            engine.runRenderLoop(function () {
+                // Rotate the box using quaternion
+                box.rotationQuaternion = quaternion;
+                quaternion = BABYLON.Quaternion.RotationYawPitchRoll(0.01, 0.01, 0).multiply(quaternion);
+
+                // Render the scene
+                scene.render();
+            });
+
+            // Resize the canvas on window resize
+            window.addEventListener('resize', function () {
+                engine.resize();
+            });
+        });
+    </script>
+</body>
+
+</html>
