@@ -1,0 +1,18 @@
+.root {
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    font-size: 40px;
+    left: 50px;
+    display: flex;
+    align-items: center;
+    color: bisque;
+    user-select: none;
+
+    .colon {
+        display: inline-block;
+        padding: 0 10px 0 10px;
+    }
+
+    .num {}
+}

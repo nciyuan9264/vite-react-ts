@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 
 type Props = {
     radius: number;
+    setRadius: Function;
 };
 
 const Model3D: React.FC<Props> = (props: Props) => {
@@ -30,12 +31,11 @@ const Model3D: React.FC<Props> = (props: Props) => {
         scene.add(sphere);
 
         camera.position.z = 100;
-
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.update();
 
         const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-        light.position.set(0, 1, 2);
+        light.position.set(8, 8, 2);
         scene.add(light);
 
         // 初始化半径并开始动画
@@ -50,7 +50,8 @@ const Model3D: React.FC<Props> = (props: Props) => {
 
 
     return (
-        <canvas ref={canvasRef} className='model' width='1000px' height='700px'></canvas>
+        <canvas ref={canvasRef} className='model' width='1000px' height='700px'>
+        </canvas>
     );
 };
 
