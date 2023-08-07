@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './index.scss'
 
-type Props = {
-    radius: number;
-    setRadius: Function;
-};
+// type Props = {
+//     radius: number;
+//     setRadius: Function;
+// };
 
-const SlidingBlock: React.FC<Props> = (props: Props) => {
+const CtrlBar: React.FC = () => {
     // const { radius, setRadius } = props;
 
     // const [isDragging, setIsDragging] = useState(false);
@@ -22,10 +22,10 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
 
 
     return (
-        <div className='root'>radius
+        <div className='cb-root'>
             
         </div>
     );
 };
 
-export default SlidingBlock;
+export default CtrlBar;

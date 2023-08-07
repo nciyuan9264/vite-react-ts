@@ -58,7 +58,7 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
 
 
     return (
-        <div className='root' ref={slidingBlockRef}>radius
+        <div className='sb-root' ref={slidingBlockRef}>radius
             <span className='colon'>:</span>
             <span className='num'
                 onMouseDown={handleMouseDown}>
