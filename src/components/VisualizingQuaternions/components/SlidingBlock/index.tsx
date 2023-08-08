@@ -4,10 +4,13 @@ import './index.scss'
 type Props = {
     radius: number;
     setRadius: Function;
+    activeFlag: any;
+    setActiveFlag: Function;
 };
 
+let timeFlag: string | number | NodeJS.Timeout | undefined;
 const SlidingBlock: React.FC<Props> = (props: Props) => {
-    const { radius, setRadius } = props;
+    const { radius, setRadius, setActiveFlag } = props;
 
     const [isDragging, setIsDragging] = useState(false);
     const [lastY, setLastY] = useState(null);
@@ -34,8 +37,11 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
                 }
             }
             setLastY(event.clientY);
+            setActiveFlag(true);
+            if (timeFlag) {
+                clearTimeout(timeFlag);
+            }
         }
-
     };
 
 
@@ -44,6 +50,9 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
             if (isDragging) {
                 setIsDragging(false);
                 setLastY(null);
+                timeFlag = setTimeout(() => {
+                    setActiveFlag(false);
+                }, 1500);
             }
         };
 
@@ -62,7 +71,7 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
             <span className='colon'>:</span>
             <span className='num'
                 onMouseDown={handleMouseDown}>
-                {radius}
+                {Math.round(radius)}
             </span>
         </div>
     );
