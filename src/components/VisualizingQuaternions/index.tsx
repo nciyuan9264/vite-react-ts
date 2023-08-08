@@ -3,6 +3,7 @@ import Model3D from './components/Model3D'
 import './index.scss'
 import SlidingBlock from './components/SlidingBlock';
 import CtrlBar from './components/CtrlBar';
+import Mouse from './components/Mouse';
 
 const VisualizingQuaternions: React.FC = () => {
     const [radius, setRadius] = useState(15);
@@ -17,6 +18,9 @@ const VisualizingQuaternions: React.FC = () => {
             </div>
             <div className='ctrlBar'>
                 <CtrlBar></CtrlBar>
+            </div>
+            <div className='mouse'>
+                {/* <Mouse></Mouse> */}
             </div>
         </div>
     );

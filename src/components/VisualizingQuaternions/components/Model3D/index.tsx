@@ -50,7 +50,7 @@ const Model3D: React.FC<Props> = (props: Props) => {
 
 
     return (
-        <canvas ref={canvasRef} className='model' width='1000px' height='700px'>
+        <canvas ref={canvasRef} className='model' width='1000px' height='600px'>
         </canvas>
     );
 };
