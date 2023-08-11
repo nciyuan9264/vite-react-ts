@@ -29,6 +29,7 @@
 
             // Create a scene
             var scene = new BABYLON.Scene(engine);
+            scene.debugLayer.show();
 
             // Create a camera and position it
             var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 4, 10, BABYLON.Vector3.Zero(), scene);

@@ -4,7 +4,9 @@ import './index.scss'
 import SlidingBlock from './components/SlidingBlock';
 import CtrlBar from './components/CtrlBar';
 import Mouse from './components/Mouse';
+import LittlePi from './components/LittlePi';
 
+let eye_x, eye_y;
 const VisualizingQuaternions: React.FC = () => {
     let activeFlag = useRef(false);
     const [radius, setRadius] = useState(15);
@@ -28,6 +30,9 @@ const VisualizingQuaternions: React.FC = () => {
             <div className='mouse'>
                 {/* <Mouse></Mouse> */}
             </div>
+            {/* <div className='littlePi'>
+                <LittlePi ></LittlePi>
+            </div> */}
         </div>
     );
 };

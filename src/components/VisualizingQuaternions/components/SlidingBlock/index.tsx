@@ -9,6 +9,7 @@ type Props = {
 };
 
 let timeFlag: string | number | NodeJS.Timeout | undefined;
+let wheelTimeout: any;
 const SlidingBlock: React.FC<Props> = (props: Props) => {
     const { radius, setRadius, setActiveFlag } = props;
 
@@ -44,6 +45,22 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
         }
     };
 
+    const handleMouseWheel = (event: any) => {
+        event.preventDefault(); // 阻止默认的滚动行为
+        setRadius(Math.floor(radius - event.deltaY / 120));
+        setActiveFlag(true);
+
+        // 清除之前的定时器
+        if (wheelTimeout) {
+            clearTimeout(wheelTimeout);
+        }
+
+        // 设置一个新的定时器，2秒后设置 activeFlag 为 false
+        wheelTimeout = setTimeout(() => {
+            setActiveFlag(false);
+        }, 2000);
+    }
+
 
     useEffect(() => {
         const handleGlobalMouseUp = () => {
@@ -70,7 +87,9 @@ const SlidingBlock: React.FC<Props> = (props: Props) => {
         <div className='sb-root' ref={slidingBlockRef}>radius
             <span className='colon'>:</span>
             <span className='num'
-                onMouseDown={handleMouseDown}>
+                onMouseDown={handleMouseDown}
+                onWheel={handleMouseWheel}
+            >
                 {Math.round(radius)}
             </span>
         </div>
