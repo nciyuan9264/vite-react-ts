@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import planckFun from './components/planck'
 import './index.scss'
 
-const PlanckJS: React.FC = () => {
+const PlanckJs: React.FC = () => {
     const startBtn = useRef(null);
     const planckTest = () => {
         planckFun();
@@ -19,4 +19,4 @@ const PlanckJS: React.FC = () => {
     );
 }
 
-export default PlanckJS;
+export default PlanckJs;

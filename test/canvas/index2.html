@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>事件传播</title>
+
+    <style>
+        #t-daddy {
+            border: 1px solid red;
+        }
+
+        #c1 {
+            background-color: pink;
+        }
+    </style>
+
+    <script>
+        function stopEvent(event) {
+            const c2 = document.getElementById("c2");
+            c2.textContent = "hello";
+
+            // 这应该阻止 t-daddy 接收点击事件
+            event.stopPropagation();
+            alert("事件传递终止");
+        }
+
+        function load() {
+            const elem = document.getElementById("tbl1");
+            elem.addEventListener("click", stopEvent, false);
+        }
+    </script>
+</head>
+
+<body onload="load();">
+    <table id="t-daddy" onclick="alert('hi');">
+        <tr id="tbl1">
+            <td id="c1">一</td>
+        </tr>
+        <tr>
+            <td id="c2">二</td>
+        </tr>
+    </table>
+</body>
+
+</html>

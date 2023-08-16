@@ -11,11 +11,17 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
+    "allowJs": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/lib/types"
+    ]
   },
+  "exclude": [],
   "include": ["src/**/*", "test/**/*"],
   "references": [{
     "path": "./tsconfig.node.json"

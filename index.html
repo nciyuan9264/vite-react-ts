@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="text/javascript" charset="UTF-8" src="./src/lib/threeJs/three/three.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./src/lib/threeJs/three/controls/TrackballControls.js"></script>
-    <title>Vite + React + TS</title>
-    <style>
-      body{
-        background-color: gray;
-      }
-      #root{
-          position: relative;
-          width: 1200px;
-          height: 800px;
-        }
-    </style>
-  </head>
-  <body style="margin: 0;">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./src/lib/babylonJs/babylon.max.js"></script>
+  <script src="./src/lib/babylonJs/babylonjs.loaders.js"></script>
+  <!-- <script src="https://cdn.babylonjs.com/viewer/babylon.viewer.max.js"></script> -->
+  <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.js"></script>
+  <!-- <script src="https://cdn.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.js"></script> -->
+  <!-- <script src="https://cdn.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.js"></script> -->
+  <!-- <script src="https://cdn.babylonjs.com/serializers/babylonjs.serializers.js"></script> -->
+  <!-- <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
+  <script src="https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.max.js"></script> -->
+
+  <!-- <script src="https://cdn.babylonjs.com/babylon.max.js"></script> -->
+  <!-- <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script> -->
+  <script src="./src/lib/babylonJs/assets.js"></script>
+  <script type="text/javascript" charset="UTF-8" src="./src/lib/threeJs/three/three.js"></script>
+  <script type="text/javascript" charset="UTF-8" src="./src/lib/threeJs/three/controls/TrackballControls.js"></script>
+  <title>Vite + React + TS</title>
+  <style>
+    body {
+      background-color: gray;
+    }
+
+    #root {
+      position: relative;
+      width: 1200px;
+      height: 800px;
+    }
+  </style>
+</head>
+
+<body style="margin: 0;">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

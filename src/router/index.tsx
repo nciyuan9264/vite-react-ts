@@ -2,18 +2,18 @@ import { useRoutes, Navigate } from "react-router-dom";
 import React from "react";
 import ThreeJs from "../components/ThreeJs";
 import PixiJs from "../components/PixiJs";
-import PlanckJS from "../components/PlanckJS";
+import PlanckJs from "../components/PlanckJS";
 import VisualizingQuaternions from "../components/VisualizingQuaternions";
-
+import BabylonJs from "../components/BabylonJs"
 const GetRouters = () => {
     const routes = useRoutes([
         {
             path: "/",
-            element: <Navigate to="/VisualizingQuaternions" />
+            element: <Navigate to="/BabylonJs" />
         },
         {
             path: "/PlanckJS",
-            element: <PlanckJS />
+            element: <PlanckJs />
         },
         {
             path: "/ThreeJs",
@@ -26,6 +26,10 @@ const GetRouters = () => {
         {
             path: "/VisualizingQuaternions",
             element: <VisualizingQuaternions />
+        },
+        {
+            path: "/BabylonJs",
+            element: <BabylonJs />
         }
     ])
     return routes
