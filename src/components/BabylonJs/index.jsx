@@ -13,7 +13,7 @@ const BabylonJs = () => {
         var camera = new BABYLON.ArcRotateCamera("camera1", 0, Math.PI / 2, 5, BABYLON.Vector3.Zero(), scene);
         camera.lowerRadiusLimit = 2;
         camera.upperRadiusLimit = 10;
-
+        window.a = scene
         camera.attachControl(canvas, true);
 
         const environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("/environment.env", scene);
@@ -21,6 +21,8 @@ const BabylonJs = () => {
         var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
 
         scene.createDefaultSkybox(environmentTexture, true, undefined, 0.3, true);
+
+        // var pbr = new BABYLON.StandardMaterial("sta", scene);
 
         var pbr = new BABYLON.PBRMaterial("pbr", scene);
         sphere.material = pbr;
