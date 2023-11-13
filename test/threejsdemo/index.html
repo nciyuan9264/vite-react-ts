@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quaternion Rotation Example</title>
+    <style>
+        body { margin: 0; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const aircraft = new THREE.Mesh(geometry, material);
+        scene.add(aircraft);
+
+        // 使用四元数表示飞机姿态
+        const quaternion = new THREE.Quaternion();
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // 模拟飞机的俯仰、偏航和滚转控制
+            const pitchAngle = Math.sin(Date.now() * 0.001); // 模拟俯仰
+            const yawAngle = Math.sin(Date.now() * 0.0015); // 模拟偏航
+            const rollAngle = Math.sin(Date.now() * 0.002); // 模拟滚转
+
+            // 使用四元数旋转
+            quaternion.setFromEuler(new THREE.Euler(pitchAngle, yawAngle, rollAngle));
+            aircraft.setRotationFromQuaternion(quaternion);
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight;
+
+            camera.aspect = newWidth / newHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(newWidth, newHeight);
+        });
+    </script>
+</body>
+</html>

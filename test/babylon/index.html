@@ -3,6 +3,7 @@
 <!--
     这是一个从chatgpt复制用来测试欧拉角的文件
 -->
+
 <head>
     <title>Babylon.js Quaternion Demo</title>
     <style>
@@ -20,43 +21,108 @@
 
 <body>
     <canvas id="renderCanvas"></canvas>
-    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="../../src//lib//babylonJs/babylon.max.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
     <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            // Get the canvas element and create a Babylon.js engine
-            var canvas = document.getElementById('renderCanvas');
-            var engine = new BABYLON.Engine(canvas, true);
 
-            // Create a scene
-            var scene = new BABYLON.Scene(engine);
-            scene.debugLayer.show();
+        // 步骤 2: 创建一个场景
+        const canvas = document.getElementById('renderCanvas');
+        const engine = new BABYLON.Engine(canvas, true);
+        const scene = new BABYLON.Scene(engine);
 
-            // Create a camera and position it
-            var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 4, 10, BABYLON.Vector3.Zero(), scene);
+        // 步骤 3: 添加一个相机和光源
+        const camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 5, BABYLON.Vector3.Zero(), scene);
+        camera.attachControl(canvas, true);
 
-            // Attach the camera to the canvas
-            camera.attachControl(canvas, true);
+        const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
 
-            // Create a box and add it to the scene
-            var box = BABYLON.MeshBuilder.CreateBox("Box", { size: 2 }, scene);
+        // 步骤 4: 创建一个可交互的 3D 对象（例如，一个C原子模型）
+        const carbon = BABYLON.MeshBuilder.CreateSphere('carbon', { diameter: 1 }, scene);
+        carbon.position = new BABYLON.Vector3(0, 0, 0);
 
-            // Create a quaternion for rotation
-            var quaternion = new BABYLON.Quaternion();
+        // 步骤 5: 创建一个标记 H 原子位置的透明模型（不可见）
+        const hydrogenGhost = BABYLON.MeshBuilder.CreateSphere('hydrogenGhost', { diameter: 1 }, scene);
+        hydrogenGhost.isVisible = false; // 初始状态下不可见
+        hydrogenGhost.material = new BABYLON.StandardMaterial('ghostMaterial', scene);
+        hydrogenGhost.material.alpha = 0.1; // 设置透明度为0.3
+        hydrogenGhost.material.wireframe = true;
 
-            // Animation loop
-            engine.runRenderLoop(function () {
-                // Rotate the box using quaternion
-                box.rotationQuaternion = quaternion;
-                quaternion = BABYLON.Quaternion.RotationYawPitchRoll(0.01, 0.01, 0).multiply(quaternion);
+        const hydrogenGhost1 = BABYLON.MeshBuilder.CreateSphere('hydrogenGhost1', { diameter: 1 }, scene);
+        hydrogenGhost1.isVisible = false; // 初始状态下不可见
+        hydrogenGhost1.material = new BABYLON.StandardMaterial('ghostMaterial', scene);
+        hydrogenGhost1.material.alpha = 0.3; // 设置透明度为0.3
 
-                // Render the scene
-                scene.render();
-            });
+        const hydrogenGhost2 = BABYLON.MeshBuilder.CreateSphere('hydrogenGhost2', { diameter: 1 }, scene);
+        hydrogenGhost2.isVisible = false; // 初始状态下不可见
+        hydrogenGhost2.material = new BABYLON.StandardMaterial('ghostMaterial', scene);
+        hydrogenGhost2.material.alpha = 0.3; // 设置透明度为0.3
+        // 步骤 6: 创建预交互功能
+        carbon.actionManager = new BABYLON.ActionManager(scene);
+        hydrogenGhost.actionManager = new BABYLON.ActionManager(scene);
+        hydrogenGhost1.actionManager = new BABYLON.ActionManager(scene);
+        hydrogenGhost2.actionManager = new BABYLON.ActionManager(scene);
+        carbon.actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(
+                BABYLON.ActionManager.OnPickTrigger,
+                function () {
+                    // 鼠标悬停在 C 原子上时，显示 H 原子的虚影
+                    hydrogenGhost.isVisible = true;
+                    hydrogenGhost.position = new BABYLON.Vector3(1.5, 0, 0); // 设置 H 原子位置
+                    hydrogenGhost1.isVisible = true;
+                    hydrogenGhost1.position = new BABYLON.Vector3(-1.5, 0, 0); // 设置 H 原子位置
+                    hydrogenGhost2.isVisible = true;
+                    hydrogenGhost2.position = new BABYLON.Vector3(0, 0, 1.5); // 设置 H 原子位置
+                    hydrogenGhost.actionManager.registerAction(
+                        new BABYLON.ExecuteCodeAction(
+                            BABYLON.ActionManager.OnPickTrigger,
+                            function () {
+                                // 鼠标离开 C 原子时，隐藏 H 原子的虚影
+                                hydrogenGhost.material.alpha = 1;
+                                hydrogenGhost1.dispose();
+                                hydrogenGhost2.dispose();
+                                hydrogenGhost.material.wireframe = false;
+                            }
+                        )
+                    );
+                    hydrogenGhost1.actionManager.registerAction(
+                        new BABYLON.ExecuteCodeAction(
+                            BABYLON.ActionManager.OnPickTrigger,
+                            function () {
+                                // 鼠标离开 C 原子时，隐藏 H 原子的虚影
+                                hydrogenGhost.dispose()
+                                hydrogenGhost1.material.alpha = 1;
+                                hydrogenGhost2.dispose()
 
-            // Resize the canvas on window resize
-            window.addEventListener('resize', function () {
-                engine.resize();
-            });
+                            }
+                        )
+                    );
+
+                    hydrogenGhost2.actionManager.registerAction(
+                        new BABYLON.ExecuteCodeAction(
+                            BABYLON.ActionManager.OnPickTrigger,
+                            function () {
+                                // 鼠标离开 C 原子时，隐藏 H 原子的虚影
+                                hydrogenGhost.dispose()
+                                hydrogenGhost1.dispose()
+                                hydrogenGhost2.material.alpha = 1;
+
+                            }
+                        )
+                    );
+                }
+            )
+
+        );
+
+        window.s = scene;
+        // 步骤 7: 渲染场景
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        // 步骤 8: 处理窗口大小变化
+        window.addEventListener('resize', function () {
+            engine.resize();
         });
     </script>
 </body>

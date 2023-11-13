@@ -1,0 +1,56 @@
+<!-- <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RxJS Retry Demo</title>
+</head>
+<body>
+    <button id="retryButton">Retry Operation</button>
+    <div id="output">Operation Result:</div>
+<script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+
+    <script>
+        const { fromEvent, of } = rxjs;
+        const { mergeMap, retry, catchError } = rxjs.operators;
+
+        const retryButton = document.getElementById('retryButton');
+        const output = document.getElementById('output');
+
+        // 创建一个按钮点击事件的Observable
+        const retryClick$ = fromEvent(retryButton, 'click');
+
+        retryClick$
+            .pipe(
+                mergeMap(() => {
+                    // 在这里可以执行需要的操作，这里模拟一个可能会出错的操作
+                    return performOperation(); // 这里模拟操作
+                }),
+                retry(3), // 在发生错误后重试3次
+                catchError(error => {
+                    return of('Operation Failed after 3 retries: ' + error); // 错误处理
+                })
+            )
+            .subscribe(
+                result => {
+                    output.textContent = 'Operation Result: ' + result;
+                }
+            );
+
+        // 模拟一个可能会出错的操作
+        function performOperation() {
+            return new Promise((resolve, reject) => {
+                // 模拟异步操作
+                setTimeout(() => {
+                    const randomValue = Math.random();
+                    if (randomValue < 0.7) {
+                        resolve('Operation Succeeded');
+                    } else {
+                        reject('Operation Failed');
+                    }
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
