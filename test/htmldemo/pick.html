@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Babylon.js Demo</title>
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
+  <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+</head>
+
+<body>
+  <canvas id="renderCanvas"></canvas>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Create Babylon.js engine and scene
+      var canvas = document.getElementById("renderCanvas");
+      canvas.width = 800;
+      canvas.height = 800;
+
+      var engine = new BABYLON.Engine(canvas, true);
+      var scene = new BABYLON.Scene(engine);
+
+      // Create an AbstractMesh (parent)
+      var parentMesh = new BABYLON.AbstractMesh("", scene);
+
+      // Create a Sphere (child)
+      var sphere = BABYLON.MeshBuilder.CreateSphere("mySphere", { diameter: 5 / Math.pow(2, 1 / 2) * 2 }, scene);
+      sphere.position = new BABYLON.Vector3(0, 0, 0);
+      const stdMaterial = new BABYLON.StandardMaterial("stdMaterial", scene);
+      sphere.material = stdMaterial;
+      // Add the sphere as a child of the parentMesh
+      parentMesh.addChild(sphere);
+
+      // Create a camera and light
+      this.camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", -Math.PI / 2, Math.PI / 2, 5, new BABYLON.Vector3(0, 0, 0), scene);
+      this.camera.attachControl(canvas, true);
+      this.camera.viewport = new BABYLON.Viewport(0, 0, 1, 1);
+      this.camera.fov = Math.PI / 2;
+
+      window.s = sphere;
+      var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+      // Set up the scene
+      scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
+
+      // Run the engine
+      engine.runRenderLoop(function () {
+        scene.render();
+      });
+      canvas.addEventListener("mousemove", event => {
+        // 获取鼠标在屏幕上的坐标
+        const pickInfo = scene.pick(scene.pointerX, scene.pointerY);
+
+        // 检查是否有物体与鼠标位置相交
+        if (pickInfo.hit) {
+          // pickInfo.pickedMesh 就是被选中的 Mesh
+          console.log(`鼠标悬停在: ${pickInfo.pickedMesh.name}`);
+        } else {
+          console.log("鼠标未悬停在任何物体上");
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener("resize", function () {
+        engine.resize();
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babylon.js Screenshot Demo</title>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <style>
+        canvas {
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var canvas = document.getElementById("renderCanvas");
+            var engine = new BABYLON.Engine(canvas, true);
+
+            // 创建场景
+            var scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color4(0, 0, 0, 0); // 设置透明背景
+
+            // 创建一个盒子
+            var box = BABYLON.MeshBuilder.CreateBox("box", { size: 2 }, scene);
+
+            // 创建相机
+            var camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 4, 4, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, true);
+
+            // 渲染场景
+            engine.runRenderLoop(function () {
+                scene.render();
+            });
+
+            // 截图按钮点击事件
+            var screenshotBtn = document.createElement("button");
+            screenshotBtn.textContent = "Capture Screenshot";
+            screenshotBtn.addEventListener("click", function () {
+                // 读取像素并生成图像数据
+                var pixels = new Uint8Array(4 * engine.getRenderWidth() * engine.getRenderHeight());
+                engine.readPixels(0, 0, engine.getRenderWidth(), engine.getRenderHeight(), pixels);
+
+                // 创建 2D 画布
+                var screenshotCanvas = document.createElement("canvas");
+                screenshotCanvas.width = engine.getRenderWidth();
+                screenshotCanvas.height = engine.getRenderHeight();
+                var context = screenshotCanvas.getContext("2d");
+
+                // 将像素数据放入画布
+                var imageData = context.createImageData(engine.getRenderWidth(), engine.getRenderHeight());
+                imageData.data.set(pixels);
+                context.putImageData(imageData, 0, 0);
+
+                // 将截图添加到页面
+                document.body.appendChild(screenshotCanvas);
+            });
+
+            document.body.appendChild(screenshotBtn);
+
+            // 处理窗口调整大小
+            window.addEventListener("resize", function () {
+                engine.resize();
+            });
+        });
+    </script>
+</body>
+</html>
