@@ -8,6 +8,13 @@
   <script src="https://cdn.babylonjs.com/babylon.js"></script>
   <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
   <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+  <style>
+    #renderCanvas{
+      position: relative;
+      left: 100px;
+      top: 100px;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,14 +23,15 @@
     document.addEventListener("DOMContentLoaded", function () {
       // Create Babylon.js engine and scene
       var canvas = document.getElementById("renderCanvas");
-      canvas.width = 800;
-      canvas.height = 800;
+      canvas.width = 500;
+      canvas.height = 500;
+
 
       var engine = new BABYLON.Engine(canvas, true);
       var scene = new BABYLON.Scene(engine);
 
       // Create an AbstractMesh (parent)
-      var parentMesh = new BABYLON.AbstractMesh("", scene);
+      // var parentMesh = new BABYLON.AbstractMesh("", scene);
 
       // Create a Sphere (child)
       var sphere = BABYLON.MeshBuilder.CreateSphere("mySphere", { diameter: 5 / Math.pow(2, 1 / 2) * 2 }, scene);
@@ -31,7 +39,8 @@
       const stdMaterial = new BABYLON.StandardMaterial("stdMaterial", scene);
       sphere.material = stdMaterial;
       // Add the sphere as a child of the parentMesh
-      parentMesh.addChild(sphere);
+      // parentMesh.addChild(sphere);
+      // sphere.material.fillmode = 4;
 
       // Create a camera and light
       this.camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", -Math.PI / 2, Math.PI / 2, 5, new BABYLON.Vector3(0, 0, 0), scene);
@@ -49,7 +58,7 @@
       engine.runRenderLoop(function () {
         scene.render();
       });
-      canvas.addEventListener("mousemove", event => {
+      window.addEventListener("mousemove", event => {
         // 获取鼠标在屏幕上的坐标
         const pickInfo = scene.pick(scene.pointerX, scene.pointerY);
 
