@@ -1,3 +1,4 @@
+// 应该用dfs，但是我想试试别的思路。。。有规律的枚举
 function maxNum(limit, map) {
     for (let i = limit; i >= 0; i--) {
         let num = map.get(i)
@@ -40,14 +41,6 @@ function cal(s) {
     }
 
 }
-
-
-
-
-
-
-
-
 
 let s = '[0,2,3,0,5,6]';
 cal(s);

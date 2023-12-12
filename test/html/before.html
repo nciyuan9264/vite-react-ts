@@ -1,0 +1,32 @@
+<title>浮动解决父级高度塌陷</title>
+<style>
+  .box1{
+     /* 父级没有高度 只设置一个边框 */
+     border: 1px  solid black;
+  }
+  .box2{
+      /* box2 只要设置 浮动 box1 父级高度就会塌陷 */
+    
+      float: left;
+      width: 200px;height: 200px;
+      background-color:  red;
+  }
+ .clearflx::after{
+     /* 父元素新增calss  用calss 最后的伪类  以和就可以调取这个类 来解决父级高度塌陷问题 */
+     /* 首先用新增加内 */
+     content: '';
+     /* 再把伪元素 转换元素类型 */
+     display: block;
+     /* 再清除 */
+     clear: both;
+
+ }
+</style>
+</head>
+<body>
+<div class="box1 clearflx">  
+ <div class="box2">  </div>
+
+</div>
+
+</body>
