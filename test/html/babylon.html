@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +11,34 @@
     <script src="./libs/babylon.js"></script>
 
 </head>
+
 <body>
     <script>
-        // const a = new BABYLON.GUI.AdvancedDynamicTexture('new');
+        // 创建 Babylon.js 场景
+        var scene = new BABYLON.Scene(engine);
+
+        // 创建相机
+        var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, BABYLON.Vector3.Zero(), scene);
+        camera.attachControl(canvas, true);
+
+        // 创建光源
+        var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+        // 创建一个发光的球体
+        var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
+
+        // 创建 GlowLayer
+        var glowLayer = new BABYLON.GlowLayer("glow", scene);
+
+        // 将球体添加到 GlowLayer
+        glowLayer.addIncludedOnlyMesh(sphere);
+
+        // 渲染场景
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
     </script>
 </body>
+
 </html>

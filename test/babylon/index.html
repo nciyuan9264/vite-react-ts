@@ -3,70 +3,72 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babylon.js Dashed TubeMesh Demo</title>
+    <title>3D Circular Arrow with Babylon.js</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
 </head>
 
 <body>
-    <canvas id="renderCanvas"></canvas>
     <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            var canvas = document.getElementById('renderCanvas');
-            var engine = new BABYLON.Engine(canvas, true);
-            canvas.width = 800;
-            canvas.height = 800;
-            var createScene = function () {
-                var scene = new BABYLON.Scene(engine);
+        // 创建场景
+        var canvas = document.createElement("canvas");
+        canvas.width = 500;
+        canvas.height = 500;
+        document.body.appendChild(canvas);
+        var engine = new BABYLON.Engine(canvas, true);
+        var scene = new BABYLON.Scene(engine);
 
-                // 起点和终点
-                var start = new BABYLON.Vector3(0, 0, 0);
-                var end = new BABYLON.Vector3(0, 2, 0);
+        // 创建环形箭头
+        var path = [];
+        for (var i = 0; i <= 300; i += 10) {
+            var angle = BABYLON.Tools.ToRadians(i);
+            var x = Math.cos(angle) * 5;
+            var z = Math.sin(angle) * 5;
+            path.push(new BABYLON.Vector3(x, 0, z));
+        }
 
-                // 添加更多点以模拟虚线
-                var numSegments = 10;
-                var path = [];
+        var tube = BABYLON.MeshBuilder.CreateTube("tube", {
+            path: path,
+            radius: 0.2,
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE,
+            cap: BABYLON.Mesh.CAP_START
+        }, scene);
 
-                for (var i = 0; i <= numSegments; i++) {
-                    var t = i / numSegments;
-                    var point = BABYLON.Vector3.Lerp(start, end, t);
-                    path.push(point);
-                }
+        // 创建箭头头部
+        var cone = BABYLON.MeshBuilder.CreateCylinder("cone", {
+            height: 1,
+            diameterTop: 0,
+            diameterBottom: 1,
+            tessellation: 96
+        }, scene);
+        cone.position = new BABYLON.Vector3(5, 0, -0.5);
+        cone.rotation.x = BABYLON.Tools.ToRadians(-90);
+        window.a = cone;
+        // 合并箭头和箭头头部
+        var arrow = BABYLON.Mesh.MergeMeshes([tube, cone], true);
 
-                // 创建多段TubeMesh
-                var tubeMeshes = [];
-                var radius = 0.1;
+        // 设置相机和光源
+        var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 20, BABYLON.Vector3.Zero(), scene);
+        camera.attachControl(canvas, true);
+        var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
-                for (var i = 0; i < numSegments; i+=2) {
-                    var tubeMesh = BABYLON.MeshBuilder.CreateTube("tubeMesh" + i, {
-                        path: [path[i], path[i + 1]],
-                        radius: radius,
-                        tessellation: 64,
-                        sideOrientation: BABYLON.Mesh.DOUBLESIDE,
-                        updatable: true,
-                    }, scene);
+        // 渲染场景
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
 
-                    tubeMeshes.push(tubeMesh);
-                }
-
-                // 创建相机和光源
-                var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, BABYLON.Vector3.Zero(), scene);
-                camera.attachControl(canvas, true);
-                var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-
-                return scene;
-            };
-
-            var scene = createScene();
-
-            engine.runRenderLoop(function () {
-                scene.render();
-            });
-
-            window.addEventListener('resize', function () {
-                engine.resize();
-            });
+        // 处理窗口调整事件
+        window.addEventListener("resize", function () {
+            engine.resize();
         });
     </script>
 </body>

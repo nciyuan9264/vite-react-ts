@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 const { HemisphericLight, Vector3, ArcRotateCamera, MeshBuilder } = BABYLON;
 
 const BabylonJs = () => {
+    const [a, setA] = useState(0);
     const canvasRef = useRef();
     let scene;
     let camera;
@@ -338,23 +339,33 @@ const BabylonJs = () => {
 
         return scene;
     };
-
     useEffect(() => {
-        engine = new BABYLON.Engine(canvasRef.current, true);
-        scene = createScene();
+        // engine = new BABYLON.Engine(canvasRef.current, true);
+        // scene = createScene();
 
-        engine.runRenderLoop(() => {
-            scene.render();
-        });
+        // engine.runRenderLoop(() => {
+        //     scene.render();
+        // });
+        setTimeout(() => {
+            setA(3);
+            console.log(a);
+        }, 0)
+        console.log(a);
 
-        return () => {
-            engine.dispose();
-        };
+        // return () => {
+        //     engine.dispose();
+        // };
     }, []);
 
     return (
-        <canvas ref={canvasRef} className='model' width='1000px' height='600px'>
-        </canvas>
+
+        <>
+            <canvas ref={canvasRef} className='model' width='1000px' height='600px'>
+            </canvas>
+            <button onClick={() => {
+                console.log(a);
+            }}></button>
+        </>
     );
 };
 

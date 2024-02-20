@@ -20,5 +20,5 @@ function cal(arr, m) {
 
 
 const m = 11;
-const arr = [1,1,1,1,1,1,1,1,1,1];
+const arr = [1,1,1,1,1,1,1,1,1,1,1];
 console.log(cal(arr, m));

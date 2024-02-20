@@ -28,7 +28,7 @@ function cal(arr, n){
     }
     let d = 0;
     let index = -1;
-    for(j = res.length - 1; j > 1; j--){
+    for(let j = res.length - 1; j > 1; j--){
         if(res[j] === res[j - 1]){
             d++;
 
