@@ -4394,13 +4394,13 @@ function clone(obj) {
   Decimal.tanh = tanh; // ES6
   Decimal.trunc = trunc; // ES6
 
-  // if (obj === void 0) obj = {};
-  // if (obj) {
-  //   if (obj.defaults !== true) {
-  //     ps = ['precision', 'rounding', 'toExpNeg', 'toExpPos', 'maxE', 'minE', 'modulo', 'crypto'];
-  //     for (i = 0; i < ps.length; ) if (!obj.hasOwnProperty((p = ps[i++]))) obj[p] = this[p];
-  //   }
-  // }
+  if (obj === void 0) obj = {};
+  if (obj) {
+    if (obj.defaults !== true) {
+      ps = ['precision', 'rounding', 'toExpNeg', 'toExpPos', 'maxE', 'minE', 'modulo', 'crypto'];
+      for (i = 0; i < ps.length; ) if (!obj.hasOwnProperty((p = ps[i++]))) obj[p] = this[p];
+    }
+  }
 
   Decimal.config(obj);
 
